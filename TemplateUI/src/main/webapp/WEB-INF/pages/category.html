@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title>Online Auction Category Page</title>
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/resources/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" href="css/auction.custom.css"
+	th:href="@{/resources/css/auction.custom.css}" />
+<!-- Custom Fonts -->
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" 
+    th:href="@{/resources/css/font-awesome.min.css}" /> 
+
+</head>
+<body>
+
+	<div th:replace="templates/header :: header"></div>
+	<div class="container">
+		 
+
+		<!-- Content Category-->
+		<div class="row"><!-- News Auction -->
+			
+			<!-- Bread crumb -->
+			<ol class="breadcrumb">
+			  <li><a href="#">Home</a></li> 
+			  <li class="active">Laptop</li>
+			</ol>
+			<!-- <div class="bg-info">
+				<blockquote>
+				  <p class="text-justify text-capitalize"> Categories Browsing </p>
+				</blockquote>  
+			</div> -->
+			<strong> 
+			<span th:text="|Category Name: Laptop  .|"> </span> <!-- ${item.itemTitle} -->
+			</strong> <br/>
+			There were 3 items Auction in Laptop.
+			<nav class="navbar-right">
+			  <ul class="pagination pagination-sm" >
+			    <li> 
+			        <a href="#">First</a> 
+			    </li>
+			    <li> 
+			        <a href="#">Prev</a> 
+			    </li>
+			    <li class="active">
+			      <a href="#">1</a> 
+			    </li> 
+			    <li>
+			      <a href="#">2</a> 
+			    </li> 
+			    <li>
+			      <a href="#">3</a> 
+			    </li> 
+			    <li>
+			      <a href="#">4</a> 
+			    </li> 
+			    <li>
+			      <a href="#">5</a> 
+			    </li> 
+			    <li>
+			      <a href="#">Next</a> 
+			    </li> 
+			    <li>
+			      <a href="#">Last</a> 
+			    </li> 
+			  </ul>
+			</nav>
+			
+			<table class="table">
+    <thead>
+      <tr>
+      	<th>#</th>
+        <th>Item</th>
+        <th>Bids</th>
+        <th>Price</th>
+        <th>End</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	<td>1</td>
+        <td><a href="#">Acer 450</a></td>
+        <td>4</td>
+        <td>12.000.000</td>
+        <td>19-05-2015 19:30</td>
+      </tr>
+      <tr>
+      	<td>2</td>
+        <td><a href="#">Apple Mac</a></td>
+        <td>14</td>
+        <td>32.000.000</td>
+        <td>12-06-2015 11:30</td>
+      </tr>
+      <tr>
+      	<td>3</td>
+        <td><a href="#">Asus 1450</a></td>
+        <td>7</td>
+        <td>10.000.000</td>
+        <td>19-06-2015 8:30</td>
+      </tr> 
+    </tbody>
+  </table>
+		</div> 
+	</div>
+	<!-- end Container -->
+	<!-- inclde footer -->
+	<div th:replace="templates/footer :: footer"></div>
+
+
+	<script src="js/jquery-latest.min.js"
+		th:src="@{/resources/js/jquery-latest.min.js}">
+		
+	</script>
+	<script src="js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+	<script src="js/bootstrap-hover-dropdown.js"
+		th:src="@{/resources/js/bootstrap-hover-dropdown.js}"></script>
+
+	<script>
+		// very simple to use!
+		$(document).ready(function() {
+			$('.js-activated').dropdownHover().dropdown();
+		});
+	</script>
+</body>
+</html>

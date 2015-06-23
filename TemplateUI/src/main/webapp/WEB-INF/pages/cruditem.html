@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title>Online Auction Item Page</title>
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/resources/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" href="css/auction.custom.css"
+	th:href="@{/resources/css/auction.custom.css}" />
+<!-- Custom Fonts -->
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" 
+    th:href="@{/resources/css/font-awesome.min.css}" /> 
+</head>
+<body>
+
+	<div th:replace="templates/header :: header"></div>
+	<div class="container">
+		<!-- Content Category-->
+		<div class="row">
+			<!-- Bread crumb -->
+			<ol class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Laptop</a></li>
+				<li class="active">New item</li>
+			</ol>
+			  
+			<div class="col-sm-6">
+				<p class="text-left"><a href="#">Add item</a></p> 
+				<p class="text-center"><strong>Item for Bid</strong></p>
+				<!-- <span th:text="| Item ${item.itemTitle} |"> </span> ${item.itemTitle} -->
+			 <br />
+				<form th:action="@{/saveItem}"
+					th:object="${item}" method="post">
+					<table class="table table-condensed">
+						<tr>
+							<td>Item title:</td>
+							<td><input type="text"  class="form-control"/></td>
+							<td>Name Error</td>
+						</tr>
+						<tr>
+							<td>Item description:</td>
+							<td><input type="text"  class="form-control"/></td>
+							<td >Name
+								Error</td>
+						</tr>
+						<tr>
+							<td>Category:</td>
+							<td><select id="sel1" class="form-control">
+								    <option>Laptop</option>
+								    <option>Book</option>
+								    <option>Phone</option>
+								    <option>4</option>
+								  </select>
+						 	</td>
+							<td>Name Error</td>
+						</tr>
+						<tr>
+							<td>Image:</td>
+							<td><input type="text" readonly="readonly" /></td>
+							<td><input type="file"   name="file"/></td> 
+						</tr>
+						<tr>
+							<td>Minium Bid Price:</td>
+							<td><input type="text"  class="form-control"
+								 /></td>
+							<td>Name Error</td>
+						</tr>
+						<tr>
+							<td>Bid End Date:</td>
+							<td><input type="text"  class="form-control"
+							 /></td>
+							<td>Name Error</td>
+						</tr>
+						<tr>
+							<td>Bid Icrement:</td>
+							<td><input type="text"   class="form-control" /></td>
+							<td>Name Error</td>
+						</tr> 
+						<tr> 
+							<td> 
+								
+								</td>
+							<td><input type="submit" value="Save"
+								class="btn btn-success" />  
+								</td> 	
+							<td> 
+								<button type="button" class="btn btn-success">Cancel</button>
+								</td> 		
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="col-sm-6"> 
+          
+        <br/><br/>
+      	<p class="text-center"><a href="#">Acer_450 </a></p>
+      	<p class="text-center">
+      	<a href="#">
+      	<img th:src="@{/resources/image/acer_450.jpg}"
+					src="../../../resources/image/acer_450.jpg"
+					class="img-thumbnail" style="width:300px;height:250px"/>
+		</a>			
+		</p>			
+					 
+       
+			</div>
+		</div>
+	</div>
+	<!-- end Container -->
+	<!-- inclde footer -->
+	<div th:replace="templates/footer :: footer"></div>
+
+
+	<script src="js/jquery-latest.min.js"
+		th:src="@{/resources/js/jquery-latest.min.js}">
+		
+	</script>
+	<script src="js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+	<script src="js/bootstrap-hover-dropdown.js"
+		th:src="@{/resources/js/bootstrap-hover-dropdown.js}"></script>
+
+	<script>
+		// very simple to use!
+		$(document).ready(function() {
+			$('.js-activated').dropdownHover().dropdown();
+		});
+	</script>
+</body>
+</html>

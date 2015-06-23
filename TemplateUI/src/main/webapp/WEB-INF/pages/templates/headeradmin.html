@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+</head>
+<body>
+	<div th:fragment="headeradmin">
+		<nav class="navbar navbar-inverse">
+ 	<div class="navbar-header">  
+    	<a class="navbar-brand" href="index">Online Auction </a> 
+	</div>
+	<!-- /.navbar-header  -->
+	<ul class="nav navbar-top-links navbar-right"> 
+	    <li class="dropdown">
+	    	<a class="dropdown-toggle" href="#" data-toggle="dropdown"> 
+			    <i class="fa fa-bell fa-fw"></i>
+			    <i class="fa fa-caret-down"></i></a> 
+			<ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#"> 
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#"> 
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                       
+                            </a>
+                        </li> 
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->    
+	    </li> 
+	    <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" > 
+          	<i class="fa fa-user fa-fw"></i><i class="caret"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+        </li>   
+	</ul>
+	<!-- /.navbar-top-links -->
+<div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu"> 
+                        <li>
+                            <a href="admin"><i class="fa fa-dashboard fa-fw"></i> Admin Page Manegement </a>
+                        </li>
+                        <li>
+                            <a href="adminUsers"><i class="fa fa-bar-chart-o fa-fw"></i> Users  </a> 
+                        </li>
+                        <li>
+                            <a href="crudcategories.html"><i class="fa fa-table fa-fw"></i> Categories </a>
+                        </li>
+                        <li>
+                            <a href="cruditems.html"><i class="fa fa-edit fa-fw"></i> Items </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Bids </a> 
+                        </li> 
+                        <li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="adminBlankPage.html">Blank Page</a>
+                                </li> 
+                                <li>
+                                    <a href="adminTablePage">Table Page</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="panels-wells.html">Panels and Wells</a>
+                                </li>
+                                <li>
+                                    <a href="buttons.html">Buttons</a>
+                                </li>
+                                <li>
+                                    <a href="notifications.html">Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">Typography</a>
+                                </li>
+                                <li>
+                                    <a href="icons.html"> Icons</a>
+                                </li>
+                                <li>
+                                    <a href="grid.html">Grid</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>	
+	</div>	 
+
+</body>
+</html>
