@@ -2,14 +2,13 @@ package com.asiantech.auction.entity;
 import javax.persistence.Entity;  
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id; 
-import javax.persistence.Table;
+import javax.persistence.Id;  
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
  
 
-@Entity
-@Table(name="Bid")
+@Entity 
 public class Bid {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO) 
@@ -21,19 +20,19 @@ public class Bid {
 	
 	@NotNull 
 	private long amount;
+	@ManyToOne 
+	private User createrId;
 	 
-	private String createrId;
-	 
-	private int itemId;
-	 
-	private String bidderId;
+	@ManyToOne
+	private Item itemId;
+	@ManyToOne 
+	private User bidderId;
 
 	public Bid() { 
 	}
-
-	public Bid(int numberIndex, String bidId, long amount, String createrId,
-			int itemId, String bidderId) {
-		super();
+	 
+	public Bid(int numberIndex, String bidId, long amount, User createrId,
+			Item itemId, User bidderId) { 
 		this.numberIndex = numberIndex;
 		this.bidId = bidId;
 		this.amount = amount;
@@ -64,31 +63,28 @@ public class Bid {
 
 	public void setAmount(long amount) {
 		this.amount = amount;
+	} 
+	public Item getItemId() {
+		return itemId;
 	}
-
-	public String getCreaterId() {
+	
+	public User getCreaterId() {
 		return createrId;
 	}
 
-	public void setCreaterId(String createrId) {
+	public void setCreaterId(User createrId) {
 		this.createrId = createrId;
 	}
 
-	public int getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
-
-	public String getBidderId() {
+	public User getBidderId() {
 		return bidderId;
 	}
 
-	public void setBidderId(String bidderId) {
+	public void setBidderId(User bidderId) {
 		this.bidderId = bidderId;
 	}
-	
-	
+
+	public void setItemId(Item itemId) {
+		this.itemId = itemId;
+	} 
 }

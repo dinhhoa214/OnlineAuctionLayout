@@ -17,17 +17,22 @@ public class UserServiceImpl implements UserService{
 	UserRepository userRepositoty;
 
 	@Override
-	public User saveOrUpdate(User user) {
-		return userRepositoty.save(user);
+	public User saveOrUpdate(User user) { 
+		// kiem tra userName co trung ko?
+		/*String newUserName = user.getUserName();
+		String oldUserName = userRepositoty.findOneByName(user.getUserName()).getUserName();
+		if(newUserName.equalsIgnoreCase(oldUserName))
+			return user;*/
+		return userRepositoty.save(user); 
 	}
 
 	@Override
-	public User getById(String id) {
+	public User getById(int id) {
 		return userRepositoty.findOne(id);
 	}
 
 	@Override
-	public void deleteById(String id) {
+	public void deleteById(int id) {
 		userRepositoty.delete(id);
 	}
 

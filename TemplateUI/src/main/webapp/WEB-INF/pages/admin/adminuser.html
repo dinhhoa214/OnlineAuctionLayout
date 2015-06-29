@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<title>Online Auction Home Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin Home Page</title>
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
 	th:href="@{/resources/css/bootstrap.min.css}" />
@@ -22,13 +23,10 @@
 	th:href="@{/resources/css/font-awesome.min.css}" />
 <!-- Morris Charts CSS -->
 <link href="css/admin/morris.css" rel="stylesheet"
-	th:href="@{/resources/css/admin/morris.css}" />
-<link rel="stylesheet" type="text/css"
-	href="css/dataTables.bootstrap.css"
-	th:href="@{/resources/css/dataTables.bootstrap.css}" />
+	th:href="@{/resources/css/admin/morris.css}" /> 
 <!-- Custom CSS -->
 <link href="css/admin/sb-admin-2.css" rel="stylesheet" type="text/css"
-	th:href="@{/resources/css/admin/sb-admin-2.css}" />	
+	th:href="@{/resources/css/admin/sb-admin-2.css}" /> 
 </head>
 <body>
 	<div th:replace="templates/headeradmin :: headeradmin"></div>
@@ -41,6 +39,62 @@
 		</div>
 		<!-- /.row -->
 		<div class="row">
+			<div class="col-sm-2">
+				<div class="form-group">
+
+					<span th:text="|Total: ${numCountRows} records.|"> </span>
+					<p />
+
+					<label>Show: <select id="maxRow" onchange="getListOfRow()">
+							<option th:each="i : ${#numbers.sequence(5, 20,5)}"
+								th:value="${i}" th:text="${i}" th:selected="${ i==sizePageDefault } ">Options</option>
+					</select> rows.
+					</label>
+				</div>
+			</div>
+			<div class="col-sm-8 text-center">
+				<!-- Button << & < -->
+				<!-- <ul class="pagination pagination-sm " th:unless="${numOfPage} == 1">
+					<li><a href="#"
+						th:href="@{/getJPA(record=1,maxRows=${maxRow})}"> &lt;&lt; </a></li>
+				</ul>
+				<ul class="pagination pagination-sm " th:unless="${numOfPage} == 1">
+					<li><a href="#"
+						th:href="@{/getJPA(record=${numOfPage - 1},maxRows=${maxRow})}">
+							&lt; </a></li>
+				</ul> -->
+
+				<!-- Button pagination -->
+				<ul class="pagination pagination-sm "
+					th:each="i : ${#numbers.sequence(1, totalRecord)}">
+
+
+					<li th:if="${i} == ${numOfPage} " class="active"><a href="#"
+						th:text="${i}"></a></li>
+					<li th:unless="${i} == ${numOfPage}">
+					<a th:href="@{/admin/adminUsers(page=${i},maxRows=${sizePageDefault})}" th:text="${i}"></a></li>
+				</ul>
+
+				<!-- Button > & >> -->
+				<!-- <ul class="pagination pagination-sm "
+					th:if="${numOfPage} != ${numPages}">
+					<li><a href="#"
+						th:href="@{/getJPA(record=${numOfPage + 1},maxRows=${maxRow})}">
+							&gt; </a></li>
+				</ul>
+				<ul class="pagination pagination-sm "
+					th:if="${numOfPage} != ${numPages}">
+					<li><a href="#"
+						th:href="@{/getJPA(record=${numPages},maxRows=${maxRow})}">
+							&gt;&gt; </a></li>
+				</ul> -->
+			</div>
+			<div class="col-sm-2">
+				<p class="text-right">
+					<a href="#" th:href="@{/admin/newUser}"
+						class="btn btn-info">Add new Account</a>
+				</p>
+			</div>
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">List of Users</div>
@@ -57,42 +111,113 @@
 										<th>Rating</th>
 										<th>Total Rating</th>
 										<th>Role</th>
-										<th>Block User</th>
+										<th>Block</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
 
-									<tr>
-										<td>1</td>
-										<td>user01</td>
-										<td>Gecko</td>
-										<td><img
-					th:src="@{/resources/image/artemis_bronze.jpg}"
-					src="../../../resources/image/artemis_bronze.jpg"
-					class="img-thumbnail"  width="48" height="20"/></td>
-										<td>3+</td>
-										<td class="center">12</td>
-										<td class="center">Role_USER</td>
-										<td class="center"><input type="checkbox"/> </td>
+									<tr data-th-each="us,i : ${users}">
+										<td data-th-text="${i.count}">1</td>
+										<td data-th-text="${us.userId}">1</td>
+										<td data-th-text="${us.userName}">John</td>
+										<td><img th:src="@{|/${us.image}|}" 
+												class="img-thumbnail" style="width: 40px; height: 20px;"/></td>
+										
+										<td data-th-text="${us.rating}">Dang su dung</td>
+										<td data-th-text="${us.totalRating}">false</td>
+										<td data-th-text="${us.Role}">false</td>
+										<td><i th:if="${us.block} != false" class="fa  fa-lock fa-fw"></i> </td> 
+										<td><a href="#"
+											th:href="@{/admin/editUser(id=${us.userId},page=${numOfPage},maxRows=${sizePageDefault})}">Edit
+										</a> / 
+										<a th:href="@{deleteUser(id=${us.userId},page=${numOfPage},maxRows=${sizePageDefault})}">Delete</a> 
+										<button class="btn btn-danger delConfirm"
+								th:attr="data-text='Are you sure you want to delete user ' + ${us.userName} + '?', data-id=${us.userId}">Delete</button>
+										</td>
 									</tr>
-									<tr>
-										<td>2</td>
-										<td>user02</td>
-										<td>Jimmy</td>
-										<td><img
-					th:src="@{/resources/image/artemis_bronze.jpg}"
-					src="../../../resources/image/artemis_bronze.jpg"
-					class="img-thumbnail"  width="48" height="20"/></td>
-										<td>1+</td>
-										<td class="center">15</td>
-										<td class="center">Role_USER</td>
-										<td class="center"><input type="checkbox"/> </td>
-									</tr> 
 								</tbody>
 							</table>
 						</div>
 						<!-- /.table-responsive -->
-						 
+						<div class="col-md-12">
+							<form id="userForm" action="#" th:action="@{/admin/saveUser}" th:object="${user}" method="post">
+								<!-- /.Form edit User -->
+								<div class="form-group">
+									<label class="control-label col-sm-1" for="email">Id:</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" placeholder="User Id" 
+										th:field="*{userId}" readonly="true"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-1" for="pwd">Name:</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" placeholder="User name"
+										th:field="*{userName}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-1" >Info:</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" placeholder="Information"
+										th:field="*{iformation}"/> 
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-1" >Password:</label>
+									<div class="col-sm-5">
+										<input type="password" class="form-control" placeholder="Password"
+										th:field="*{password}"/> 
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-1" >Rating:</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" placeholder="Rating"
+										th:field="*{rating}"/> 
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-1" for="pwd">Role:</label>
+									<div class="col-sm-5">
+										<select class="form-control" th:field="*{Role}">
+											<option value="ROLE_USER">ROLE_USER</option>
+											<option value="ROLE_ADMIN">ROLE_ADMIN</option>
+											<option value="ROLE_VISITER">ROLE_VISITER</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-1" >Total:</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" placeholder="Total rating"
+										th:field="*{totalRating}"/> 
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-1 col-sm-5">
+										<div class="checkbox">
+											<label>  
+											<input type="checkbox" th:field="*{block}" th:value="true"/>Block User</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-sm-1" >Image:</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" placeholder="Image directory"
+										th:field="*{image}"/> 
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-1 col-sm-5">
+										<button type="submit" class="btn btn-success">Save</button> 
+									</div>
+
+								</div>
+							</form>
+						</div>
 					</div>
 					<!-- /.panel-body -->
 				</div>
@@ -103,11 +228,6 @@
 
 	</div>
 	<!-- /#page-wrapper -->
-	<div th:replace="templates/footeradmin :: footeradmin"></div>
-	<script> 
-	$(document).ready(function() {
-    	$('#example').dataTable();
-	} ); 
-	</script>
+	<div th:replace="templates/footeradmin :: footeradmin"></div> 
 </body>
 </html>

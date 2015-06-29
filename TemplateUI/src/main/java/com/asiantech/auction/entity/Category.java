@@ -2,19 +2,19 @@ package com.asiantech.auction.entity;
 import javax.persistence.Entity;  
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id; 
-import javax.persistence.Table;
+import javax.persistence.Id;  
 import javax.validation.constraints.NotNull; 
+import javax.validation.constraints.Size;
  
 
-@Entity
-@Table(name="Category")
+@Entity 
 public class Category {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private int Id;
 	
-	@NotNull  
+	@NotNull
+	@Size(min = 3, max = 10, message = "Category name must be between 3 and 10 characters long.") 
 	private String name;
 
 	public Category() { 

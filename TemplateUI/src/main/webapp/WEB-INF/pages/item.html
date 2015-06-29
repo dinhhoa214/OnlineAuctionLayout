@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Online Auction Bid Item Page</title>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
 <link rel="stylesheet" type="text/css"
@@ -47,7 +48,10 @@ class="rating" data-clearable="remove" data-icon-lib="fa" data-active-icon="fa-s
           
         <br/> <br/><br />
       	<p>
-      	<strong>End: <span id="clock"></span></strong></p>
+      	<strong>End:   
+   					<span id="clock" data-countdown="2017/01/01"></span>
+ </strong></p>
+       
 				<!-- <span th:text="| Item ${item.itemTitle} |"> </span> ${item.itemTitle} -->
 			 
 				<form th:action="@{/saveItem}"
@@ -105,10 +109,16 @@ class="rating" data-clearable="remove" data-icon-lib="fa" data-active-icon="fa-s
 <script src="jquery/jquery.countdown.min.js"
 		th:src="@{/resources/jquery/jquery.countdown.min.js}">
 	</script>		  
-<script>
-    $('#clock').countdown('2015/6/20', function(event) {
-	    $(this).html(event.strftime('%D Days, %H Hours, %M Minutes, %S Second.'));
-	 });
+<script th:inline="javascript"> 
+$('[data-countdown]').each(function() {
+   var $this = $(this), finalDate = [[${endtime}]];
+   $this.countdown(finalDate, function(event) {
+    $this.html(event.strftime('%D Days %H hours, %M minutes, %S seconds.'));
+   });
+   $this.on('finish.countdown', function(event) {
+	     alert('Auction ended. User dinhhoa.vta is winter.');
+   });
+  });
     </script>  
 	<script src="js/bootstrap.min.js"
 		th:src="@{/resources/js/bootstrap.min.js}"></script>

@@ -14,10 +14,10 @@ public interface UserService {
 	public User saveOrUpdate(User user);
 
 	// Read
-	public User getById(String id);
+	public User getById(int id);
 
 	// Delete
-	public void deleteById(String id);
+	public void deleteById(int id);
 
 	// Get All
 	public List<User> getAll();

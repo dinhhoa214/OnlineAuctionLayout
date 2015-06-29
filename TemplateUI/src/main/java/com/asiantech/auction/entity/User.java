@@ -1,74 +1,79 @@
-package com.asiantech.auction.entity; 
+package com.asiantech.auction.entity;  
+import javax.persistence.Column;
 import javax.persistence.Entity; 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated; 
-import javax.persistence.Id; 
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;  
+import javax.validation.constraints.NotNull; 
  
 
-@Entity
-@Table(name="User")
+@Entity 
 public class User {
-	public enum Role{ROLE_ADMIN,ROLE_USER}
+	public enum Role{ROLE_ADMIN,ROLE_USER,ROLE_VISITER}
 	
 	@Id   
-	private String userId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int userId;
 	
-	@NotNull
-	@Size(min = 1, max = 100, message = "User name valirdation ")  
-	private String name;
+	  
+	@Column(unique=true)
+	@NotNull()
+	private String userName;
+	
+	@NotNull 
+	private String password;
 	
 	@Enumerated(EnumType.STRING) 
 	private Role Role;
 	
-	@NotNull
-	@Size(min = 1, max = 1000, message = "Information user must be not empty!")  
-	private String iformation;
-	 
-	private float rating;
-	 
-	private float totalRating;
-	 
+	@NotNull 
+	private String iformation; 
+	private float rating; 
+	private float totalRating; 
 	private String image;
+	private boolean block;
 
 	public User() { 
-	} 
+	}   
 	
-
-	public User(String userId, String name,
-			com.asiantech.auction.entity.User.Role role,
-			String iformation, float rating, float totalRating, String image) {
+	public User(int userId, String userName, String password,
+			com.asiantech.auction.entity.User.Role role, String iformation,
+			float rating, float totalRating, String image, boolean block) {
 		super();
 		this.userId = userId;
-		this.name = name;
+		this.userName = userName;
+		this.password = password;
 		Role = role;
 		this.iformation = iformation;
 		this.rating = rating;
 		this.totalRating = totalRating;
 		this.image = image;
+		this.block = block;
 	}
-	
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
+	 
 
-
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public Role getRole() {
 		return Role;
 	}
@@ -107,6 +112,14 @@ public class User {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public boolean isBlock() {
+		return block;
+	}
+
+	public void setBlock(boolean block) {
+		this.block = block;
 	}
 	
 	

@@ -8,13 +8,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;  
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.ManyToOne; 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name="Item")
+@Entity 
 public class Item {
 	public enum StatusBid{A,I}
 	
@@ -51,7 +49,7 @@ public class Item {
 	  
 	private String itemImage; 
 	
-	@ManyToOne(optional=false) 
+	@ManyToOne
 	private Category category;  
 	public Item() { 
 	}
